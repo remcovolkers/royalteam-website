@@ -1,0 +1,7 @@
+// ==========================================================================
+// Main entry — bundelt alle partials in de juiste volgorde
+// ==========================================================================
+@use 'variables';
+@use 'base';
+@use 'animations';
+@use 'components';

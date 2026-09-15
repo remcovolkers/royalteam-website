@@ -1,0 +1,91 @@
+{
+  "updatedAt": "2026-09-15",
+  "note": "Statische snapshot. Wordt later automatisch ververst vanuit Raider.IO / Warcraft Logs.",
+  "teams": [
+    {
+      "id": "crusaders",
+      "name": "Crusaders",
+      "description": "Ons woensdag/maandag team.",
+      "schedule": [
+        { "day": "Woensdag", "time": "20:00 - 23:00" },
+        { "day": "Maandag", "time": "20:00 - 23:00" }
+      ],
+      "warcraftLogsGuildId": 744461,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/744461",
+      "raids": [
+        {
+          "name": "Tidebound Grotto",
+          "difficulties": {
+            "normal": { "killed": 1, "total": 1 },
+            "heroic": { "killed": 1, "total": 1 },
+            "mythic": { "killed": 0, "total": 1 }
+          }
+        },
+        {
+          "name": "Venomous Abyss",
+          "difficulties": {
+            "normal": { "killed": 8, "total": 8 },
+            "heroic": { "killed": 7, "total": 8 },
+            "mythic": { "killed": 1, "total": 8 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "templars",
+      "name": "Templars",
+      "description": "Ons donderdag/zondag team.",
+      "schedule": [
+        { "day": "Donderdag", "time": "20:00 - 23:00" },
+        { "day": "Zondag", "time": "20:00 - 23:00" }
+      ],
+      "warcraftLogsGuildId": 816789,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/816789",
+      "raids": [
+        {
+          "name": "Tidebound Grotto",
+          "difficulties": {
+            "normal": { "killed": 1, "total": 1 },
+            "heroic": { "killed": 1, "total": 1 },
+            "mythic": { "killed": 0, "total": 1 }
+          }
+        },
+        {
+          "name": "Venomous Abyss",
+          "difficulties": {
+            "normal": { "killed": 8, "total": 8 },
+            "heroic": { "killed": 7, "total": 8 },
+            "mythic": { "killed": 0, "total": 8 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "social-raid",
+      "name": "Social Raid",
+      "description": "Ons laagdrempelige social-raidteam.",
+      "schedule": [{ "day": "Dinsdag", "time": "20:30 - 22:30" }],
+      "warcraftLogsGuildId": 665432,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/665432",
+      "raids": [
+        {
+          "name": "Tidebound Grotto",
+          "difficulties": {
+            "normal": { "killed": 1, "total": 1 },
+            "heroic": { "killed": 1, "total": 1 },
+            "mythic": { "killed": 0, "total": 1 }
+          }
+        },
+        {
+          "name": "Venomous Abyss",
+          "difficulties": {
+            "normal": { "killed": 8, "total": 8 },
+            "heroic": { "killed": 0, "total": 8 },
+            "mythic": { "killed": 0, "total": 8 }
+          }
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,68 @@
+// ==========================================================================
+// Base — reset & globale elementen
+// ==========================================================================
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: $color-bg;
+  background-image: radial-gradient(circle at top, $color-bg-alt 0%, $color-bg 60%);
+  color: $color-text;
+  font-family: $font-body;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.2;
+  color: $color-gold;
+}
+
+a {
+  color: $color-gold-light;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-gold;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: $max-width;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+::selection {
+  background-color: $color-gold;
+  color: $color-text-inverse;
+}

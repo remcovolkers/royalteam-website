@@ -1,0 +1,481 @@
+// ==========================================================================
+// Components — herbruikbare UI-blokken
+// ==========================================================================
+@use 'variables' as *;
+
+// --- Header & navigatie -----------------------------------------------
+// Verborgen boven de fold; verschijnt als vaste balk zodra er gescrold wordt.
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: $z-header;
+  background-color: rgba($color-bg-alt, 0.9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid $color-border;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity $transition-base, transform $transition-base;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.75rem;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+
+.logo {
+  height: 72px;
+  width: auto;
+  transition: transform $transition-base;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+}
+
+// --- Hero ---------------------------------------------------------------
+.hero {
+  position: relative;
+  padding-block: 7rem 5rem;
+  text-align: center;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba($color-bg, 0) 0%, $color-bg 100%),
+    linear-gradient(135deg, $color-surface-alt 0%, $color-mane 100%);
+  border-bottom: 1px solid $color-border;
+
+  &__crest {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(420px, 55vw, 760px);
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    background-image: url('/icons/logo-900x900.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.1;
+    filter: grayscale(1) brightness(1.6);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__badge {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    padding: 0.35rem 1rem;
+    border: 1px solid $color-gold-dark;
+    border-radius: 999px;
+    color: $color-gold-light;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: $font-display;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 12px rgba($color-gold, 0.25);
+  }
+
+  .tagline {
+    margin-top: 0.75rem;
+    color: $color-text-muted;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    flex-wrap: wrap;
+  }
+}
+
+// --- Sections -------------------------------------------------------------
+.section {
+  // compensatie voor de vaste header die over de content heen verschijnt
+  scroll-margin-top: 6rem;
+  padding-block: 4.5rem;
+  border-bottom: 1px solid $color-border;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  &__lead {
+    max-width: 60ch;
+    color: $color-text-muted;
+    margin-bottom: 2.5rem;
+  }
+}
+
+// --- Stat blocks ------------------------------------------------------------
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 1.25rem 1rem;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+
+  &__value {
+    display: block;
+    font-family: $font-heading;
+    font-size: 2rem;
+    color: $color-gold;
+  }
+
+  &__label {
+    display: block;
+    margin-top: 0.25rem;
+    color: $color-text-muted;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// --- Cards ---------------------------------------------------------------
+.card {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: 1.5rem;
+  transition: border-color $transition-base, transform $transition-base;
+
+  &:hover {
+    border-color: $color-brown;
+    transform: translateY(-2px);
+  }
+}
+
+// --- Link hub ---------------------------------------------------------------
+.link-hub {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text;
+  transition: border-color $transition-base, transform $transition-base, background-color $transition-base;
+
+  &__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+
+    // service-logo's (bijv. Warcraft Logs) i.p.v. een emoji
+    &[src] {
+      width: 1.75rem;
+      height: 1.75rem;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    color: $color-gold;
+    letter-spacing: 0.03em;
+  }
+
+  &__desc {
+    color: $color-text-muted;
+    font-size: 0.9rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: $color-gold-dark;
+    background-color: $color-surface-alt;
+    transform: translateY(-3px);
+  }
+}
+
+// --- Teams / progress ---------------------------------------------------------------
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.team-card {
+  // voorkomt dat lange tekst (footer/schedule) de grid-kolom breder duwt dan de track
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+
+    h3 {
+      color: $color-gold;
+    }
+  }
+
+  &__desc {
+    color: $color-text-muted;
+    margin-bottom: 1.25rem;
+  }
+
+  &__footer {
+    // vast t.o.v. de raid-progress-blokken, zodat die altijd gelijk uitlijnen tussen kaarten
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid $color-border;
+    font-size: 0.85rem;
+    color: $color-text-muted;
+  }
+
+  &__schedule {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    column-gap: 1.25rem;
+    row-gap: 0.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__schedule-day {
+    white-space: nowrap;
+  }
+
+  &__schedule-time {
+    white-space: nowrap;
+    justify-self: end;
+  }
+
+  &__wcl-link {
+    display: inline-flex;
+    align-items: center;
+    // rechts uitgelijnd, ongeacht het aantal (onzichtbare) schedule-regels erboven
+    align-self: flex-end;
+    gap: 0.4rem;
+
+    img {
+      display: block;
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+// --- Raid progress (één blok per actieve raid binnen een team) ---------------------------------------------------------------
+.raid-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.raid-progress {
+  padding-top: 1.25rem;
+  border-top: 1px solid $color-border;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    color: $color-brown-light;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-text-muted;
+}
+
+.progress-count {
+  text-align: right;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background-color: $color-bg-alt;
+  border: 1px solid $color-border;
+  overflow: hidden;
+
+  &__fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.8s ease;
+    background-color: $color-brown;
+
+    &--heroic {
+      background-color: $color-brown-light;
+    }
+
+    &--mythic {
+      background-color: $color-gold;
+    }
+  }
+}
+
+// --- Schedule table ---------------------------------------------------------------
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+
+  th,
+  td {
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid $color-border;
+  }
+
+  th {
+    background-color: $color-surface-alt;
+    font-family: $font-heading;
+    color: $color-gold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  tbody tr {
+    background-color: $color-surface;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background-color: $color-surface-alt;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// --- Buttons ---------------------------------------------------------------
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  border-radius: $radius-sm;
+  font-family: $font-heading;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid $color-gold-dark;
+  background-color: transparent;
+  color: $color-gold;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base, transform $transition-base;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-gold;
+    color: $color-text-inverse;
+    transform: translateY(-2px);
+  }
+
+  &--solid {
+    background-color: $color-gold;
+    color: $color-text-inverse;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-gold-light;
+    }
+  }
+}
+
+// --- Footer ---------------------------------------------------------------
+.site-footer {
+  padding-block: 2.5rem;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: 0.85rem;
+  border-top: 1px solid $color-border;
+
+  &__links {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+}
+
