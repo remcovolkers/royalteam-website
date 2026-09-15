@@ -6,6 +6,7 @@ import '@fontsource/cinzel/700.css';
 import '@fontsource/cinzel-decorative/700.css';
 import '../styles/main.scss';
 import progressData from '../data/progress.json';
+import streamersData from '../data/streamers.json';
 import warcraftLogsIcon from '../assets/icons/warcraftlogs.png';
 
 const DIFFICULTY_LABELS = {
@@ -89,7 +90,40 @@ function renderSchedule(teams) {
 
   body.innerHTML = teams
     .flatMap((team) => team.schedule.map((slot) => ({ team: team.name, ...slot })))
-    .map((row) => `<tr><td>${row.team}</td><td>${row.day}</td><td>${row.time}</td></tr>`)
+    .map(
+      (row) =>
+        `<tr><td data-label="Team">${row.team}</td><td data-label="Dag">${row.day}</td><td data-label="Tijd">${row.time}</td></tr>`,
+    )
+    .join('');
+}
+
+// Twitch controleert de "parent" query-param tegen het domein dat de pagina embedt.
+function renderStreamers(streamers) {
+  const grid = document.querySelector('#streamers-grid');
+  if (!grid) return;
+
+  const parent = window.location.hostname;
+
+  grid.innerHTML = streamers
+    .map(
+      (streamer) => `
+        <article class="card streamer-card">
+          <div class="streamer-card__embed">
+            <iframe
+              src="https://player.twitch.tv/?channel=${streamer.channel}&parent=${parent}&muted=true&autoplay=false"
+              title="Twitch-stream van ${streamer.name}"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="streamer-card__footer">
+            <span class="streamer-card__name">${streamer.name}</span>
+            <a class="streamer-card__link" href="${streamer.url}" target="_blank" rel="noopener noreferrer">
+              Bekijk op Twitch &rarr;
+            </a>
+          </div>
+        </article>`,
+    )
     .join('');
 }
 
@@ -146,6 +180,7 @@ function initHeaderReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   renderTeams(progressData.teams);
   renderSchedule(progressData.teams);
+  renderStreamers(streamersData.streamers);
   // Reveal groups are populated dynamically, so observe them after render.
   initScrollReveal();
   initHeaderReveal();
