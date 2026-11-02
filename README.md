@@ -20,7 +20,7 @@ Deployment naar GitHub Pages (`royal-team.nl`) gebeurt automatisch via [.github/
 - `index.html` — de pagina-inhoud
 - `src/styles/` — SCSS, opgesplitst in `_variables`, `_base`, `_animations` en `_components`
 - `src/scripts/main.js` — rendert de teamprogress/planning en regelt de scroll-animaties
-- `src/data/progress.json` — statische progressdata voor de Crusaders en Templars raidteams
+- `src/data/teams.json` + `progress.json` — teams en door Warcraft Logs gegenereerde progress
 - `scripts/generate-icons.mjs` — genereert de favicon/icon-bundel uit `src/assets/images/logo-source.png`
 
 ## Inhoud
@@ -42,14 +42,21 @@ Deployment naar GitHub Pages (`royal-team.nl`) gebeurt automatisch via [.github/
 | Crusaders | <https://www.warcraftlogs.com/guild/id/744461> |
 | Templars | <https://www.warcraftlogs.com/guild/id/816789> |
 
-De progress in `src/data/progress.json` is momenteel handmatig bijgewerkt. Zie de sectie hieronder voor het plan om dit te automatiseren.
+## Warcraft Logs-data
 
-## Idee: automatische progress-data
+De raidprogress komt uit Warcraft Logs (v2 API) en wordt gegenereerd door [scripts/fetch-wcl.mjs](scripts/fetch-wcl.mjs):
 
-Warcraft Logs vereist OAuth (client id/secret) voor de v2 GraphQL API, dus een secret kan niet vanuit de browser worden aangeroepen op een statische site. Voorstel:
+- `src/data/teams.json` — teams, raidavonden, WCL guild-ID's en `warcraftLogs.zoneIds` (de raids die getoond worden)
+- `src/data/progress.json` — gegenereerde kills per team/raid/moeilijkheid; de gecommitte versie is de fallback-snapshot
 
-1. Een geplande GitHub Action (bijv. dagelijks, `schedule` trigger) draait een Node-script dat met `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (repo secrets) de laatste kills/progress ophaalt via de Warcraft Logs API.
-2. Het script schrijft de resultaten naar `src/data/progress.json` en commit dit terug (of maakt een PR).
-3. De bestaande `deploy.yml`-workflow bouwt en publiceert de site zoals gebruikelijk.
+Eenmalig instellen:
 
-Voor eenvoudigere guild-brede stats (zonder OAuth) kan de publieke [Raider.IO API](https://raider.io/api) eventueel zelfs direct client-side aangeroepen worden, al ondersteunt die geen onderverdeling per raidteam.
+1. Maak een API-client op <https://www.warcraftlogs.com/api/clients> en voeg `WCL_CLIENT_ID` en `WCL_CLIENT_SECRET` toe als GitHub repo secrets (lokaal: een `.env` bestand).
+2. Draai `npm run wcl:zones` en zet de ID's van de huidige raid(s) in `zoneIds` in `teams.json`.
+3. `npm run wcl:fetch` ververst `progress.json` lokaal. In GitHub Actions gebeurt dit automatisch bij elke deploy en dagelijks om 06:00 UTC; mislukt het, dan blijft de snapshot staan.
+
+## SEO
+
+- Pagina's: `/` (homepage), `/retail/`, `/forever/`, elk met eigen title, description, H1, canonical en Open Graph.
+- `public/robots.txt`, `public/sitemap.xml` en `public/404.html` worden mee gedeployed.
+- Voeg bij nieuwe pagina's een `rollupOptions.input`-entry toe in `vite.config.js` en een `<url>` in de sitemap.

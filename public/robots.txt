@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://royal-team.nl/sitemap.xml

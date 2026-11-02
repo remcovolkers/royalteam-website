@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -7,6 +8,14 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    // Multi-page: elke pagina krijgt een eigen map in dist/ (o.a. /retail/ en /forever/)
+    rollupOptions: {
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        retail: resolve(import.meta.dirname, 'retail/index.html'),
+        forever: resolve(import.meta.dirname, 'forever/index.html'),
+      },
+    },
   },
   css: {
     preprocessorOptions: {

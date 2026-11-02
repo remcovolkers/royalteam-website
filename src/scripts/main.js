@@ -5,6 +5,7 @@ import '@fontsource/cinzel/400.css';
 import '@fontsource/cinzel/700.css';
 import '@fontsource/cinzel-decorative/700.css';
 import '../styles/main.scss';
+import teamsData from '../data/teams.json';
 import progressData from '../data/progress.json';
 import streamersData from '../data/streamers.json';
 import warcraftLogsIcon from '../assets/icons/warcraftlogs.png';
@@ -31,6 +32,24 @@ function renderDifficultyBars(difficulties) {
     .join('');
 }
 
+// Voegt de statische teamgegevens (teams.json) samen met de door Warcraft Logs gegenereerde progress (progress.json).
+function mergeTeams() {
+  return teamsData.teams.map((team) => ({
+    ...team,
+    raids: progressData.teams[team.id]?.raids ?? [],
+  }));
+}
+
+function renderProgressUpdated() {
+  const el = document.querySelector('#progress-updated');
+  if (!el || !progressData.updatedAt) return;
+
+  const date = new Date(progressData.updatedAt);
+  if (Number.isNaN(date.getTime())) return;
+
+  el.textContent = `Laatst bijgewerkt op ${date.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}.`;
+}
+
 function renderTeams(teams) {
   const grid = document.querySelector('#teams-grid');
   if (!grid) return;
@@ -49,6 +68,7 @@ function renderTeams(teams) {
             </div>`,
         )
         .join('');
+      const raidContent = raidBlocks || '<p class="team-card__desc">Nog geen raidprogress beschikbaar.</p>';
 
       const scheduleRows = team.schedule
         .map(
@@ -68,7 +88,7 @@ function renderTeams(teams) {
           </header>
           ${description}
           <div class="raid-progress-list">
-            ${raidBlocks}
+            ${raidContent}
           </div>
           <footer class="team-card__footer">
             <div class="team-card__schedule">
@@ -178,8 +198,10 @@ function initHeaderReveal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderTeams(progressData.teams);
-  renderSchedule(progressData.teams);
+  const teams = mergeTeams();
+  renderTeams(teams);
+  renderSchedule(teams);
+  renderProgressUpdated();
   renderStreamers(streamersData.streamers);
   // Reveal groups are populated dynamically, so observe them after render.
   initScrollReveal();

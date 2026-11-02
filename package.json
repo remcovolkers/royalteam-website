@@ -8,6 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "wcl:zones": "node scripts/fetch-wcl.mjs --zones",
+    "wcl:fetch": "node scripts/fetch-wcl.mjs",
     "generate:icons": "node scripts/generate-icons.mjs"
   },
   "devDependencies": {

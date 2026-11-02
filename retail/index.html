@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WoW Retail Guild – Raid &amp; Mythic+ | RoyalTeam</title>
+    <meta
+      name="description"
+      content="Nederlandstalige WoW Retail guild: raid met onze teams Crusaders en Templars, doe Mythic+ keys en sluit aan bij onze social content. Bekijk de actuele raidprogress en raidplanning van RoyalTeam."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://royal-team.nl/retail/" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/logo-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/logo-180x180.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RoyalTeam" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:title" content="WoW Retail Guild – Raid &amp; Mythic+ | RoyalTeam" />
+    <meta
+      property="og:description"
+      content="Nederlandstalige WoW Retail guild met raidteams Crusaders en Templars, Mythic+ en social content."
+    />
+    <meta property="og:image" content="https://royal-team.nl/icons/logo-400x400.png" />
+    <meta property="og:url" content="https://royal-team.nl/retail/" />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "RoyalTeam", "item": "https://royal-team.nl/" },
+          { "@type": "ListItem", "position": 2, "name": "Retail", "item": "https://royal-team.nl/retail/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="/" aria-label="RoyalTeam - naar de homepage">
+          <img class="logo" src="/icons/logo-192x192.png" alt="RoyalTeam logo" width="48" height="48" />
+        </a>
+        <nav class="site-nav" aria-label="Hoofdnavigatie">
+          <a href="/">Home</a>
+          <a href="/retail/" aria-current="page">Retail</a>
+          <a href="/forever/">Forever</a>
+          <a href="#teams">Progress</a>
+          <a href="#schedule">Planning</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero__crest" aria-hidden="true"></div>
+        <div class="container">
+          <span class="hero__badge">WoW Retail</span>
+          <h1>RoyalTeam Retail &ndash; Nederlandstalige WoW Raid &amp; Mythic+ Guild</h1>
+          <p class="tagline">Crusaders &middot; Templars &middot; Mythic+ &middot; Social</p>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">
+              Recruitment
+            </a>
+            <a class="btn" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
+              Join Discord
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section container reveal">
+        <h2 class="section__title">Een Nederlandstalige guild voor WoW Retail</h2>
+        <p class="section__lead">
+          RoyalTeam is een Nederlandstalige Retail guild met een actieve, open en gezellige community. Retail is
+          cross-realm, dus je kunt je vanaf elke realm aansluiten en gewoon in het Nederlands met ons raiden, keys doen
+          en kletsen.
+        </p>
+        <div class="link-hub reveal-group">
+          <div class="link-card">
+            <span class="link-card__title">Crusaders</span>
+            <span class="link-card__desc">
+              Ons vaste raidteam op maandag en woensdag, gericht op progressie in Heroic en Mythic.
+            </span>
+          </div>
+          <div class="link-card">
+            <span class="link-card__title">Templars</span>
+            <span class="link-card__desc">
+              Ons vaste raidteam op donderdag en zondag, gericht op progressie in Heroic en Mythic.
+            </span>
+          </div>
+          <div class="link-card">
+            <span class="link-card__title">Mythic+</span>
+            <span class="link-card__desc">
+              Keys doen met guildleden: van beginnende keys tot hoge Mythic+ levels, altijd via onze open Discord.
+            </span>
+          </div>
+          <div class="link-card">
+            <span class="link-card__title">Social content</span>
+            <span class="link-card__desc">
+              Een laagdrempelige social raid op dinsdag en community events voor wie lekker relaxed wil spelen.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section id="teams" class="section container reveal">
+        <h2 class="section__title">Raidprogress</h2>
+        <p class="section__lead">
+          Actuele progress van onze Retail raidteams, automatisch opgehaald uit Warcraft Logs.
+          <span id="progress-updated"></span>
+        </p>
+        <div id="teams-grid" class="teams-grid reveal-group"></div>
+      </section>
+
+      <section id="schedule" class="section container reveal">
+        <h2 class="section__title">Raidplanning</h2>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Dag</th>
+              <th>Tijd</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-body"></tbody>
+        </table>
+      </section>
+
+      <section id="join" class="section container reveal">
+        <h2 class="section__title">Meedoen op Retail</h2>
+        <p class="section__lead">
+          Zin om mee te raiden of keys te doen? Kom langs in onze Discord of meld je aan via de recruitment-server.
+          Speel je ook Classic? Bekijk dan onze <a href="/forever/">WoW Forever guild</a>.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">
+            Recruitment
+          </a>
+          <a class="btn" href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+            Raider.IO
+          </a>
+          <a
+            class="btn"
+            href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Warcraft Logs
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer__links">
+          <a href="/">Home</a>
+          <a href="/retail/">Retail</a>
+          <a href="/forever/">Forever</a>
+          <a href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+            Raider.IO
+          </a>
+          <a
+            href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Warcraft Logs
+          </a>
+        </div>
+        <p>&copy; 2026 RoyalTeam. Alle rechten voorbehouden.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>

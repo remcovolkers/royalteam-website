@@ -1,0 +1,37 @@
+{
+  "warcraftLogs": {
+    "zoneIds": []
+  },
+  "teams": [
+    {
+      "id": "crusaders",
+      "name": "Crusaders",
+      "description": "Ons woensdag/maandag team.",
+      "schedule": [
+        { "day": "Woensdag", "time": "20:00 - 23:00" },
+        { "day": "Maandag", "time": "20:00 - 23:00" }
+      ],
+      "warcraftLogsGuildId": 744461,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/744461"
+    },
+    {
+      "id": "templars",
+      "name": "Templars",
+      "description": "Ons donderdag/zondag team.",
+      "schedule": [
+        { "day": "Donderdag", "time": "20:00 - 23:00" },
+        { "day": "Zondag", "time": "20:00 - 23:00" }
+      ],
+      "warcraftLogsGuildId": 816789,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/816789"
+    },
+    {
+      "id": "social-raid",
+      "name": "Social Raid",
+      "description": "Ons laagdrempelige social-raidteam.",
+      "schedule": [{ "day": "Dinsdag", "time": "20:30 - 22:30" }],
+      "warcraftLogsGuildId": 665432,
+      "warcraftLogsUrl": "https://www.warcraftlogs.com/guild/id/665432"
+    }
+  ]
+}
