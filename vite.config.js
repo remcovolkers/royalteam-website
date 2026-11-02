@@ -17,13 +17,6 @@ export default defineConfig({
       },
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern',
-      },
-    },
-  },
   server: {
     port: 5173,
     open: true,

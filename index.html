@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl">
+<html class="dark" lang="nl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,152 +56,261 @@
         ]
       }
     </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=analytics,arrow_forward,calendar_clock,chevron_right,close,forum,groups,history,history_edu,how_to_reg,language,leaderboard,menu,military_tech,north_east,shield,stadia_controller,swords,token,workspace_premium&display=block" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <a href="/" aria-label="RoyalTeam - naar de homepage">
-          <img class="logo" src="/icons/logo-192x192.png" alt="RoyalTeam logo" width="48" height="48" />
+  <body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col">
+    <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_10px_30px_-5px_rgba(0,0,0,0.8),0_0_1px_1px_rgba(240,196,25,0.08)]">
+      <div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md">
+        <a class="flex items-center gap-space-sm group" href="/" aria-label="RoyalTeam - naar de homepage">
+          <img class="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105" src="/icons/logo-192x192.png" alt="RoyalTeam logo" width="40" height="40" />
+          <span class="flex flex-col">
+            <span class="font-headline-sm text-headline-sm text-primary tracking-widest uppercase leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">RoyalTeam</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-space-xs hidden sm:block">Nederlandstalige WoW Guild</span>
+          </span>
         </a>
-        <nav class="site-nav" aria-label="Hoofdnavigatie">
-          <a href="/retail/">Retail</a>
-          <a href="/forever/">Forever</a>
-          <a href="#links">Links</a>
-          <a href="#streamers">Streamers</a>
+        <nav class="hidden lg:flex items-center gap-space-xl" aria-label="Hoofdnavigatie">
+          <a class="uppercase transition-colors py-space-xs text-primary border-b border-primary-container font-headline-sm" href="/" aria-current="page">Home</a>
+          <a class="font-headline-sm text-headline-sm text-on-surface-variant uppercase hover:text-primary transition-colors py-space-xs" href="/retail/">Retail</a>
+          <a class="font-headline-sm text-headline-sm text-on-surface-variant uppercase hover:text-primary transition-colors py-space-xs" href="/forever/">Forever</a>
+          <a class="font-headline-sm text-headline-sm text-on-surface-variant uppercase hover:text-primary transition-colors py-space-xs" href="/#streamers">Streamers</a>
         </nav>
+        <div class="flex items-center gap-space-md">
+          <a class="hidden sm:inline-flex items-center gap-space-xs px-space-lg py-space-sm bg-gradient-to-br from-primary via-primary-container to-secondary-container text-on-primary font-label-md text-label-md uppercase tracking-wider rounded-lg shadow-[0_0_12px_rgba(240,196,25,0.3)] hover:shadow-[0_0_20px_rgba(240,196,25,0.6)] hover:brightness-110 active:scale-95 transition-all" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">forum</span>
+            <span>Join Discord</span>
+          </a>
+          <button id="nav-toggle" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg bg-surface-container text-primary" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+            <span class="material-symbols-outlined text-[24px]" aria-hidden="true">menu</span>
+          </button>
+        </div>
       </div>
+      <nav id="mobile-nav" class="hidden lg:hidden bg-surface px-margin-mobile pb-space-md flex flex-col" aria-label="Mobiele navigatie">
+        <a class="font-headline-sm text-headline-sm uppercase py-space-sm text-primary" href="/" aria-current="page">Home</a>
+        <a class="font-headline-sm text-headline-sm uppercase py-space-sm text-on-surface-variant" href="/retail/">Retail</a>
+        <a class="font-headline-sm text-headline-sm uppercase py-space-sm text-on-surface-variant" href="/forever/">Forever</a>
+        <a class="font-headline-sm text-headline-sm uppercase py-space-sm text-on-surface-variant" href="/#streamers">Streamers</a>
+        <a class="mt-space-sm inline-flex items-center gap-space-xs px-space-xl py-3 rounded-lg bg-gradient-to-br from-primary via-primary-container to-secondary-container text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-[0_0_20px_rgba(240,196,25,0.35)] hover:shadow-[0_0_28px_rgba(240,196,25,0.6)] hover:brightness-110 active:scale-95 transition-all justify-center" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-[20px]" aria-hidden="true">forum</span><span>Join Discord</span></a>
+      </nav>
     </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero__crest" aria-hidden="true"></div>
-        <div class="container">
-          <span class="hero__badge">Nederlandstalige guild</span>
-          <h1>RoyalTeam &ndash; Nederlandstalige World of Warcraft Guild</h1>
-          <p class="tagline">Retail &amp; Forever</p>
-          <div class="hero__cta">
-            <a class="btn btn--solid" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
-              Join Discord
+    <main id="top" class="w-full pt-20 flex-1">
+      <section class="relative w-full overflow-hidden bg-surface-container-lowest px-margin-mobile lg:px-margin py-space-xl lg:py-28 flex flex-col items-center text-center">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-primary-container/20 rounded-full blur-[80px] pointer-events-none"></div>
+        <div class="relative z-10 mb-space-lg group">
+          <div class="absolute inset-0 bg-primary/25 rounded-full blur-2xl scale-95 group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="relative w-44 h-44 sm:w-56 sm:h-56 lg:w-64 lg:h-64 flex items-center justify-center p-space-sm">
+            <img class="w-full h-full object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)] transition-transform duration-500 hover:scale-105" src="/icons/logo-400x400.png" alt="RoyalTeam logo: leeuw met kroon" width="256" height="256" />
+          </div>
+        </div>
+        <div class="relative z-10 inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-low shadow-sm mb-space-md">
+          <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">workspace_premium</span>
+          <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Nederlandstalige guild</span>
+        </div>
+        <h1 class="relative z-10 max-w-4xl font-headline-xl text-[24px] leading-[32px] sm:text-headline-xl break-words lg:text-[46px] lg:leading-[54px] text-on-surface uppercase tracking-wider mb-space-xs drop-shadow-md">
+          RoyalTeam &ndash; <span class="bg-gradient-to-r from-primary via-primary-fixed to-secondary text-transparent bg-clip-text">Nederlandstalige</span> World of Warcraft Guild
+        </h1>
+        <p class="relative z-10 font-headline-md text-headline-md text-on-surface-variant tracking-[0.25em] uppercase mb-space-xl">Retail &bull; Forever</p>
+        <div class="relative z-10 flex flex-wrap items-center justify-center gap-space-md w-full max-w-xl">
+          <a class="inline-flex items-center gap-space-xs px-space-xl py-3 rounded-lg bg-gradient-to-br from-primary via-primary-container to-secondary-container text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-[0_0_20px_rgba(240,196,25,0.35)] hover:shadow-[0_0_28px_rgba(240,196,25,0.6)] hover:brightness-110 active:scale-95 transition-all" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-[20px]" aria-hidden="true">forum</span><span>Join Discord</span></a>
+          <a class="inline-flex items-center gap-space-xs px-space-lg py-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md uppercase tracking-wider transition-all hover:scale-105 active:scale-95" href="/retail/"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">swords</span><span>Retail</span></a>
+          <a class="inline-flex items-center gap-space-xs px-space-lg py-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md uppercase tracking-wider transition-all hover:scale-105 active:scale-95" href="/forever/"><span class="material-symbols-outlined text-[18px] text-secondary" aria-hidden="true">history_edu</span><span>Forever</span></a>
+        </div>
+        <div class="relative z-10 flex items-center justify-center gap-space-md w-full max-w-2xl mt-16 opacity-75" aria-hidden="true">
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
+          <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">shield</span>
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
+        </div>
+      </section>
+
+      <section id="about" class="w-full bg-surface px-margin-mobile lg:px-margin py-space-xl">
+        <div class="max-w-[1440px] mx-auto flex flex-col items-center">
+          <div class="text-center max-w-3xl mb-space-xl">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-space-xs">Over onze guild</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-wide mb-space-md">Een Nederlandse WoW guild voor Retail en Forever</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-space-md">RoyalTeam is een Nederlandstalige World of Warcraft guild met een gezellige, actieve en open community. Of je nu serieus wilt raiden, Mythic+ keys wilt doen of gewoon sociaal wilt spelen: bij ons praat je gewoon Nederlands.</p>
+            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Op <strong class="text-primary">Retail</strong> raiden we met onze teams <strong class="text-primary">Crusaders</strong> en <strong class="text-primary">Templars</strong>, met daarnaast een laagdrempelige social raid, Mythic+ en community events. Op <strong class="text-secondary">WoW Forever</strong> spelen we Alliance op PvE (Normal): samen levelen, dungeons lopen en 10-, 20- en 40-man raids.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg w-full max-w-5xl">
+            <div class="relative p-space-lg rounded-xl bg-surface-container-low flex flex-col items-center text-center shadow-lg transition-transform duration-300 hover:-translate-y-1">
+              <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-space-md text-primary"><span class="material-symbols-outlined text-[30px]" aria-hidden="true">language</span></div>
+              <div class="font-headline-xl text-[24px] leading-[32px] sm:text-headline-xl break-words text-primary mb-space-xs">NL</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-space-xs">Nederlandstalig</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Bij ons praat je gewoon Nederlands, in-game en op Discord.</p>
+            </div>
+            <div class="relative p-space-lg rounded-xl bg-surface-container-low flex flex-col items-center text-center shadow-lg transition-transform duration-300 hover:-translate-y-1">
+              <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-space-md text-secondary"><span class="material-symbols-outlined text-[30px]" aria-hidden="true">stadia_controller</span></div>
+              <div class="font-headline-xl text-[24px] leading-[32px] sm:text-headline-xl break-words text-secondary mb-space-xs">2 Games</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-space-xs">Retail &amp; Forever</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Een community voor zowel WoW Retail als WoW Forever.</p>
+            </div>
+            <div class="relative p-space-lg rounded-xl bg-surface-container-low flex flex-col items-center text-center shadow-lg transition-transform duration-300 hover:-translate-y-1">
+              <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center mb-space-md text-primary-fixed-dim"><span class="material-symbols-outlined text-[30px]" aria-hidden="true">groups</span></div>
+              <div class="font-headline-xl text-[24px] leading-[32px] sm:text-headline-xl break-words text-primary-fixed-dim mb-space-xs">3 Raidteams</div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-space-xs">Crusaders, Templars &amp; Social</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Van progressie-raiden tot een laagdrempelige social raid.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="games" class="w-full bg-surface-container-lowest px-margin-mobile lg:px-margin py-space-xl">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex flex-col items-center text-center mb-space-xl">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-space-xs">Kies je pad</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-wide">Retail &amp; Forever</h2>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+            <div class="relative rounded-xl bg-surface-container-low p-space-lg lg:p-space-xl flex flex-col justify-between overflow-hidden shadow-2xl group">
+              <div class="absolute -right-16 -top-16 w-60 h-60 bg-primary/10 group-hover:bg-primary/20 rounded-full blur-3xl pointer-events-none transition-all duration-700"></div>
+              <div class="relative">
+                <div class="relative w-full h-40 rounded-lg overflow-hidden mb-space-lg bg-gradient-to-br from-primary-container/20 via-surface-container to-surface-container-high flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[72px] text-primary opacity-30 group-hover:scale-110 transition-transform duration-700" aria-hidden="true">token</span>
+                  <div class="absolute top-space-md left-space-md flex flex-wrap gap-space-xs"><span class="px-space-sm py-1 rounded bg-primary-container text-on-primary font-bold font-label-sm text-label-sm uppercase tracking-wider">Raid</span><span class="px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider">Mythic+</span><span class="px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider">Social</span></div>
+                </div>
+                <h3 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide mb-space-xs">WoW Retail</h3>
+                <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-space-md">Cross-realm &bull; Nederlandstalig</p>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg leading-relaxed">Ons Retail front heeft raidteams <span class="text-primary font-semibold">Crusaders</span> en <span class="text-primary font-semibold">Templars</span>, een laagdrempelige social raid, Mythic+ keys en community events in een ontspannen maar gedreven sfeer.</p>
+                <div class="grid grid-cols-2 gap-space-sm mb-space-lg p-space-md rounded-lg bg-surface-container"><div><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Teams</span><span class="font-headline-sm text-headline-sm text-on-surface">Crusaders &middot; Templars &middot; Social</span></div><div><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Ook</span><span class="font-headline-sm text-headline-sm text-primary">Mythic+ &amp; events</span></div></div>
+              </div>
+              <a class="relative inline-flex items-center justify-between px-space-lg py-3 rounded-lg bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-md text-label-md uppercase tracking-wider transition-all duration-300 shadow-md" href="/retail/"><span>Ontdek Retail</span><span class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <div class="relative rounded-xl bg-surface-container-low p-space-lg lg:p-space-xl flex flex-col justify-between overflow-hidden shadow-2xl group">
+              <div class="absolute -right-16 -top-16 w-60 h-60 bg-tertiary-container/15 group-hover:bg-tertiary-container/25 rounded-full blur-3xl pointer-events-none transition-all duration-700"></div>
+              <div class="relative">
+                <div class="relative w-full h-40 rounded-lg overflow-hidden mb-space-lg bg-gradient-to-br from-tertiary-container/20 via-surface-container to-surface-container-high flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[72px] text-secondary opacity-30 group-hover:scale-110 transition-transform duration-700" aria-hidden="true">history</span>
+                  <div class="absolute top-space-md left-space-md flex flex-wrap gap-space-xs"><span class="px-space-sm py-1 rounded bg-secondary-container text-secondary-fixed font-bold font-label-sm text-label-sm uppercase tracking-wider">Alliance PvE</span><span class="px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider">Levelen</span><span class="px-space-sm py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider">10/20/40-man</span></div>
+                </div>
+                <h3 class="font-headline-lg text-headline-lg text-secondary uppercase tracking-wide mb-space-xs">WoW Forever</h3>
+                <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-space-md">Alliance &bull; PvE (Normal)</p>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg leading-relaxed">Op WoW Forever hebben we een Nederlandstalige Alliance-community op een PvE-realm: samen levelen, vaste dungeongroepen en 10-, 20- en 40-man raids in guildverband.</p>
+                <div class="grid grid-cols-2 gap-space-sm mb-space-lg p-space-md rounded-lg bg-surface-container"><div><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Factie</span><span class="font-headline-sm text-headline-sm text-on-surface">Alliance</span></div><div><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Type</span><span class="font-headline-sm text-headline-sm text-secondary">PvE (Normal)</span></div></div>
+              </div>
+              <a class="relative inline-flex items-center justify-between px-space-lg py-3 rounded-lg bg-secondary hover:bg-secondary-fixed-dim text-on-secondary font-label-md text-label-md uppercase tracking-wider transition-all duration-300 shadow-md" href="/forever/"><span>Ontdek Forever</span><span class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_forward</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="links" class="w-full bg-surface px-margin-mobile lg:px-margin py-space-xl">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex flex-col items-center text-center mb-space-xl">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-space-xs">Links</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-wide">Volg de guild of meld je aan</h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+            <a class="group relative p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 flex flex-col justify-between shadow-lg hover:-translate-y-1" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
+              <div class="flex items-center justify-between mb-space-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container group-hover:bg-primary-container text-primary group-hover:text-on-primary-container flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-[26px]" aria-hidden="true">forum</span></div>
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors" aria-hidden="true">north_east</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-1 group-hover:text-primary transition-colors">Discord</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">De hub voor community &amp; raidorganisatie.</p>
+              </div>
             </a>
-            <a class="btn" href="/retail/">Retail</a>
-            <a class="btn" href="/forever/">Forever</a>
+            <a class="group relative p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 flex flex-col justify-between shadow-lg hover:-translate-y-1" href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+              <div class="flex items-center justify-between mb-space-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container group-hover:bg-primary-container text-secondary group-hover:text-on-primary-container flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-[26px]" aria-hidden="true">leaderboard</span></div>
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors" aria-hidden="true">north_east</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-1 group-hover:text-primary transition-colors">Raider.IO</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Guildprofiel, M+ en raidscores.</p>
+              </div>
+            </a>
+            <a class="group relative p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 flex flex-col justify-between shadow-lg hover:-translate-y-1" href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+              <div class="flex items-center justify-between mb-space-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container group-hover:bg-primary-container text-tertiary group-hover:text-on-primary-container flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-[26px]" aria-hidden="true">analytics</span></div>
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors" aria-hidden="true">north_east</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-1 group-hover:text-primary transition-colors">Warcraft Logs</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Raidrapporten en performance-analyse.</p>
+              </div>
+            </a>
+            <a class="group relative p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 flex flex-col justify-between shadow-lg hover:-translate-y-1" href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">
+              <div class="flex items-center justify-between mb-space-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container group-hover:bg-primary-container text-primary-fixed-dim group-hover:text-on-primary-container flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-[26px]" aria-hidden="true">how_to_reg</span></div>
+                <span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary transition-colors" aria-hidden="true">north_east</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-1 group-hover:text-primary transition-colors">Recruitment</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Sluit je aan bij Crusaders of Templars.</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="about" class="section container reveal">
-        <h2 class="section__title">Een Nederlandse WoW guild voor Retail en Forever</h2>
-        <p class="section__lead">
-          RoyalTeam is een Nederlandstalige World of Warcraft guild met een gezellige, actieve en open community. Of je nu
-          serieus wilt raiden, Mythic+ keys wilt doen of gewoon sociaal wilt spelen: bij ons praat je gewoon Nederlands.
-        </p>
-        <p class="section__lead">
-          Op <strong>Retail</strong> raiden we met onze teams <strong>Crusaders</strong> en <strong>Templars</strong>, met
-          daarnaast een laagdrempelige social raid, Mythic+ en community events. Op <strong>WoW Forever</strong> spelen we
-          Alliance op PvE (Normal): samen levelen, dungeons lopen en 10-, 20- en 40-man raids.
-        </p>
-        <div class="stats-row reveal-group">
-          <div class="stat">
-            <span class="stat__value">NL</span>
-            <span class="stat__label">Nederlandstalig</span>
+      <section id="streamers" class="w-full bg-surface-container-lowest px-margin-mobile lg:px-margin py-space-xl">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex flex-col mb-space-xl">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-space-xs">Live uitzendingen</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-wide">Royal Streamers</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-space-sm">Kijk live mee met onze guildleden. Zodra een streamer live gaat, verschijnt de stream hieronder automatisch.</p>
           </div>
-          <div class="stat">
-            <span class="stat__value">2</span>
-            <span class="stat__label">Games: Retail &amp; Forever</span>
-          </div>
-          <div class="stat">
-            <span class="stat__value">3</span>
-            <span class="stat__label">Retail raidteams</span>
-          </div>
+          <div id="streamers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg"></div>
         </div>
       </section>
 
-      <section id="games" class="section container reveal">
-        <h2 class="section__title">Retail &amp; Forever</h2>
-        <p class="section__lead">Kies waar je speelt en bekijk wat wij daar doen.</p>
-        <div class="link-hub reveal-group">
-          <a class="link-card" href="/retail/">
-            <span class="link-card__icon" aria-hidden="true">⚔️</span>
-            <span class="link-card__title">WoW Retail</span>
-            <span class="link-card__desc">
-              Raidteams Crusaders en Templars, Mythic+, social content, raidprogress en planning.
-            </span>
-          </a>
-          <a class="link-card" href="/forever/">
-            <span class="link-card__icon" aria-hidden="true">🛡️</span>
-            <span class="link-card__title">WoW Forever</span>
-            <span class="link-card__desc">
-              Alliance op PvE (Normal): samen levelen, dungeons en 10/20/40-man raids.
-            </span>
-          </a>
+      <section class="w-full bg-surface px-margin-mobile lg:px-margin py-space-xl">
+        <div class="max-w-[1440px] mx-auto rounded-xl bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low p-space-lg lg:p-space-xl flex flex-col lg:flex-row items-center justify-between gap-space-lg shadow-2xl">
+          <div class="max-w-2xl text-center lg:text-left">
+            <h2 class="font-headline-lg text-headline-lg text-primary uppercase mb-space-xs">Klaar om mee te doen?</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Kom langs in onze Discord. Of je nu een vast raidteam zoekt, Mythic+ keys wilt lopen of gewoon gezellig wilt levelen: je bent welkom.</p>
+          </div>
+          <a class="inline-flex items-center gap-space-xs px-space-xl py-3 rounded-lg bg-gradient-to-br from-primary via-primary-container to-secondary-container text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-[0_0_20px_rgba(240,196,25,0.35)] hover:shadow-[0_0_28px_rgba(240,196,25,0.6)] hover:brightness-110 active:scale-95 transition-all shrink-0" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-[20px]" aria-hidden="true">forum</span><span>Sluit je aan</span></a>
         </div>
-      </section>
-
-      <section id="links" class="section container reveal">
-        <h2 class="section__title">Links</h2>
-        <p class="section__lead">Alles wat je nodig hebt om de guild te volgen of je aan te melden.</p>
-        <div class="link-hub reveal-group">
-          <a class="link-card" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
-            <img class="link-card__icon" src="/src/assets/icons/discord.webp" alt="" width="28" height="28" />
-            <span class="link-card__title">Discord</span>
-            <span class="link-card__desc">De hub voor community &amp; raidorganisatie.</span>
-          </a>
-          <a
-            class="link-card"
-            href="https://raider.io/guilds/eu/silvermoon/RoyalTeam"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img class="link-card__icon" src="/src/assets/icons/raiderio.webp" alt="" width="28" height="28" />
-            <span class="link-card__title">Raider.IO</span>
-            <span class="link-card__desc">Guildprofiel, M+ en raidscores.</span>
-          </a>
-          <a
-            class="link-card"
-            href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img class="link-card__icon" src="/src/assets/icons/warcraftlogs.png" alt="" width="28" height="28" />
-            <span class="link-card__title">Warcraft Logs</span>
-            <span class="link-card__desc">Raidrapporten en performance-analyse.</span>
-          </a>
-          <a class="link-card" href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">
-            <span class="link-card__icon" aria-hidden="true">🛡️</span>
-            <span class="link-card__title">Recruitment</span>
-            <span class="link-card__desc">Sluit je aan bij Crusaders of Templars.</span>
-          </a>
-        </div>
-      </section>
-
-      <section id="streamers" class="section container reveal">
-        <h2 class="section__title">Royal Streamers</h2>
-        <p class="section__lead">
-          Kijk live mee met onze guildleden. Zodra een streamer live gaat, verschijnt de stream hieronder automatisch.
-        </p>
-        <div id="streamers-grid" class="streamers-grid reveal-group"></div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <div class="site-footer__links">
-          <a href="/retail/">Retail</a>
-          <a href="/forever/">Forever</a>
-          <a href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
-            Raider.IO
-          </a>
-          <a
-            href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Warcraft Logs
-          </a>
-          <a href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">Recruitment</a>
+    <footer class="w-full bg-surface-container-lowest mt-auto relative shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.8)]">
+      <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-60"></div>
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl mb-space-xl">
+          <div class="flex flex-col gap-space-md">
+            <div class="flex items-center gap-space-sm">
+              <img class="h-8 w-8 object-contain" src="/icons/logo-192x192.png" alt="" width="32" height="32" loading="lazy" />
+              <span class="font-headline-md text-headline-md text-primary tracking-widest uppercase">RoyalTeam</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Nederlandstalige World of Warcraft guild voor Retail en WoW Forever: raiden, Mythic+, samen levelen en een open Discord.</p>
+          </div>
+          <div class="flex flex-col gap-space-md">
+            <h2 class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider">Navigatie</h2>
+            <nav class="flex flex-col gap-space-sm" aria-label="Footernavigatie">
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="/"><span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" aria-hidden="true">chevron_right</span>Home</a>
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="/retail/"><span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" aria-hidden="true">chevron_right</span>WoW Retail</a>
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="/forever/"><span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" aria-hidden="true">chevron_right</span>WoW Forever</a>
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="/#streamers"><span class="material-symbols-outlined text-[16px] text-primary-fixed-dim" aria-hidden="true">chevron_right</span>Streamers</a>
+            </nav>
+          </div>
+          <div class="flex flex-col gap-space-md">
+            <h2 class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider">Links</h2>
+            <div class="flex flex-col gap-space-sm">
+              <a class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-on-surface group" href="https://discord.gg/2UTBfxj" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined text-[24px] text-primary group-hover:scale-110 transition-transform" aria-hidden="true">forum</span>
+              <span class="flex flex-col"><span class="font-label-md text-label-md leading-none">Discord</span><span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Community &amp; raidorganisatie</span></span>
+            </a>
+              <a class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-on-surface group" href="https://discord.gg/EQys4YTHCk" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined text-[24px] text-primary-fixed-dim group-hover:scale-110 transition-transform" aria-hidden="true">how_to_reg</span>
+              <span class="flex flex-col"><span class="font-label-md text-label-md leading-none">Recruitment</span><span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Sluit je aan bij een raidteam</span></span>
+            </a>
+              <a class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-on-surface group" href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined text-[24px] text-secondary group-hover:scale-110 transition-transform" aria-hidden="true">leaderboard</span>
+              <span class="flex flex-col"><span class="font-label-md text-label-md leading-none">Raider.IO</span><span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Guildprofiel, M+ en raidscores</span></span>
+            </a>
+              <a class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors text-on-surface group" href="https://www.warcraftlogs.com/guild/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined text-[24px] text-tertiary-container group-hover:scale-110 transition-transform" aria-hidden="true">analytics</span>
+              <span class="flex flex-col"><span class="font-label-md text-label-md leading-none">Warcraft Logs</span><span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Raidrapporten</span></span>
+            </a>
+            </div>
+          </div>
         </div>
-        <p>&copy; 2026 RoyalTeam. Alle rechten voorbehouden.</p>
+        <p class="pt-space-lg border-t border-outline-variant/30 font-body-sm text-body-sm text-on-surface-variant text-center">&copy; 2026 RoyalTeam. Alle rechten voorbehouden.</p>
       </div>
     </footer>
 

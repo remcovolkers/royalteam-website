@@ -13,8 +13,10 @@
     "generate:icons": "node scripts/generate-icons.mjs"
   },
   "devDependencies": {
-    "sass": "^1.79.4",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
     "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.19",
     "vite": "^8.3.0"
   },
   "dependencies": {

@@ -103,6 +103,10 @@ const zones = [];
 for (const id of zoneIds) {
   const zone = await getZone(id);
   if (!zone) throw new Error(`Zone ${id} niet gevonden`);
+  if (zone.encounters.length === 0) {
+    console.warn(`Zone ${id} (${zone.name}) heeft nog geen encounters in Warcraft Logs en wordt overgeslagen.`);
+    continue;
+  }
   zones.push(zone);
 }
 

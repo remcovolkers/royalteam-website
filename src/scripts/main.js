@@ -1,36 +1,25 @@
 import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
-import '@fontsource/cinzel/400.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/cinzel/600.css';
 import '@fontsource/cinzel/700.css';
 import '@fontsource/cinzel-decorative/700.css';
-import '../styles/main.scss';
+import '../styles/main.css';
 import teamsData from '../data/teams.json';
 import progressData from '../data/progress.json';
 import streamersData from '../data/streamers.json';
-import warcraftLogsIcon from '../assets/icons/warcraftlogs.png';
 
-const DIFFICULTY_LABELS = {
-  normal: 'Normal',
-  heroic: 'Heroic',
-  mythic: 'Mythic',
+const DIFFICULTIES = {
+  normal: { label: 'Normal', text: 'text-secondary-fixed', bar: 'bg-secondary-fixed' },
+  heroic: { label: 'Heroic', text: 'text-primary', bar: 'bg-primary-container' },
+  mythic: { label: 'Mythic', text: 'text-secondary', bar: 'bg-secondary' },
 };
 
-function renderDifficultyBars(difficulties) {
-  return Object.entries(difficulties)
-    .map(([difficulty, { killed, total }]) => {
-      const pct = total ? Math.round((killed / total) * 100) : 0;
-      return `
-        <div class="progress-row">
-          <span class="progress-label">${DIFFICULTY_LABELS[difficulty] ?? difficulty}</span>
-          <div class="progress-bar" role="progressbar" aria-valuenow="${killed}" aria-valuemin="0" aria-valuemax="${total}">
-            <div class="progress-bar__fill progress-bar__fill--${difficulty}" style="width: ${pct}%"></div>
-          </div>
-          <span class="progress-count">${killed}/${total}</span>
-        </div>`;
-    })
-    .join('');
-}
+const TEAM_ICONS = {
+  crusaders: 'military_tech',
+  templars: 'shield',
+  'social-raid': 'groups',
+};
 
 // Voegt de statische teamgegevens (teams.json) samen met de door Warcraft Logs gegenereerde progress (progress.json).
 function mergeTeams() {
@@ -47,58 +36,84 @@ function renderProgressUpdated() {
   const date = new Date(progressData.updatedAt);
   if (Number.isNaN(date.getTime())) return;
 
-  el.textContent = `Laatst bijgewerkt op ${date.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}.`;
+  el.textContent = `Laatst bijgewerkt op ${date.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+  el.closest('[data-updated-wrapper]')?.classList.remove('hidden');
+}
+
+function renderDifficultyBars(difficulties) {
+  return Object.entries(difficulties)
+    .map(([difficulty, { killed, total }]) => {
+      const style = DIFFICULTIES[difficulty] ?? DIFFICULTIES.normal;
+      const pct = total ? Math.round((killed / total) * 100) : 0;
+      const cleared = total > 0 && killed === total ? ' (Cleared)' : '';
+      return `
+        <div class="flex flex-col gap-1">
+          <div class="flex justify-between font-label-sm text-label-sm">
+            <span class="text-on-surface">${style.label}</span>
+            <span class="${style.text} font-bold">${killed} / ${total}${cleared}</span>
+          </div>
+          <div class="w-full h-2.5 rounded bg-surface-container-highest overflow-hidden" role="progressbar" aria-label="${style.label} progress" aria-valuenow="${killed}" aria-valuemin="0" aria-valuemax="${total}">
+            <div class="h-full ${style.bar} rounded transition-all duration-700" style="width: ${pct}%"></div>
+          </div>
+        </div>`;
+    })
+    .join('');
+}
+
+const WEEKDAYS = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'];
+
+function sortSchedule(schedule) {
+  return [...schedule].sort((a, b) => WEEKDAYS.indexOf(a.day) - WEEKDAYS.indexOf(b.day));
+}
+
+// Groepeert dagen met dezelfde tijd: "Maandag & Woensdag 20:00 - 23:00"
+function formatSchedule(schedule) {
+  const byTime = new Map();
+  for (const slot of sortSchedule(schedule)) {
+    byTime.set(slot.time, [...(byTime.get(slot.time) ?? []), slot.day]);
+  }
+  return [...byTime].map(([time, days]) => `${days.join(' &amp; ')} ${time}`).join(' &middot; ');
 }
 
 function renderTeams(teams) {
   const grid = document.querySelector('#teams-grid');
   if (!grid) return;
 
-  // teams met minder raidavonden krijgen onzichtbare vulregels, zodat de WCL-link overal even hoog uitkomt
-  const maxScheduleRows = Math.max(...teams.map((team) => team.schedule.length));
-
   grid.innerHTML = teams
     .map((team) => {
-      const raidBlocks = team.raids
+      const raids = team.raids
         .map(
           (raid) => `
-            <div class="raid-progress">
-              <h4 class="raid-progress__title">${raid.name}</h4>
+            <div class="flex flex-col gap-space-md">
+              <div class="p-space-sm bg-surface-container rounded">
+                <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase text-[10px]">Raid</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface">${raid.name}</span>
+              </div>
               ${renderDifficultyBars(raid.difficulties)}
             </div>`,
         )
         .join('');
-      const raidContent = raidBlocks || '<p class="team-card__desc">Nog geen raidprogress beschikbaar.</p>';
-
-      const scheduleRows = team.schedule
-        .map(
-          (s) =>
-            `<span class="team-card__schedule-day">${s.day}</span><span class="team-card__schedule-time">${s.time}</span>`,
-        )
-        .join('');
-      const paddingRows = '<span aria-hidden="true">&nbsp;</span><span aria-hidden="true">&nbsp;</span>'.repeat(
-        maxScheduleRows - team.schedule.length,
-      );
-      const description = team.description ? `<p class="team-card__desc">${team.description}</p>` : '';
+      const raidContent = raids || '<p class="font-body-sm text-body-sm text-on-surface-variant">Nog geen raidprogress beschikbaar.</p>';
+      const description = team.description ? `<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">${team.description}</p>` : '';
 
       return `
-        <article class="card team-card">
-          <header class="team-card__header">
-            <h3>${team.name}</h3>
-          </header>
-          ${description}
-          <div class="raid-progress-list">
-            ${raidContent}
-          </div>
-          <footer class="team-card__footer">
-            <div class="team-card__schedule">
-              ${scheduleRows}${paddingRows}
+        <article class="flex flex-col p-space-lg rounded-xl bg-surface-container-low shadow-xl">
+          <div class="flex items-start justify-between gap-space-md pb-space-md">
+            <div>
+              <h3 class="font-headline-lg text-headline-lg text-primary">${team.name}</h3>
+              ${description}
             </div>
-            <a class="team-card__wcl-link" href="${team.warcraftLogsUrl}" target="_blank" rel="noopener noreferrer">
-              <img src="${warcraftLogsIcon}" alt="" width="18" height="18" />
-              Warcraft Logs &rarr;
-            </a>
-          </footer>
+            <span class="material-symbols-outlined text-primary text-[28px]" aria-hidden="true">${TEAM_ICONS[team.id] ?? 'military_tech'}</span>
+          </div>
+          <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
+            <span class="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">calendar_clock</span>
+            <span>${formatSchedule(team.schedule)}</span>
+          </div>
+          <div class="flex flex-col gap-space-lg mb-space-xl flex-1">${raidContent}</div>
+          <a class="inline-flex items-center justify-between p-space-sm rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider transition-colors" href="${team.warcraftLogsUrl}" target="_blank" rel="noopener noreferrer">
+            <span>Warcraft Logs</span>
+            <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+          </a>
         </article>`;
     })
     .join('');
@@ -109,10 +124,19 @@ function renderSchedule(teams) {
   if (!body) return;
 
   body.innerHTML = teams
-    .flatMap((team) => team.schedule.map((slot) => ({ team: team.name, ...slot })))
+    .flatMap((team) => sortSchedule(team.schedule).map((slot) => ({ team: team.name, id: team.id, ...slot })))
     .map(
-      (row) =>
-        `<tr><td data-label="Team">${row.team}</td><td data-label="Dag">${row.day}</td><td data-label="Tijd">${row.time}</td></tr>`,
+      (row, index) => `
+        <tr class="hover:bg-surface-container transition-colors${index % 2 ? ' bg-surface-container-lowest/40' : ''}">
+          <td class="py-space-md px-space-lg">
+            <div class="flex items-center gap-space-sm">
+              <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">${TEAM_ICONS[row.id] ?? 'military_tech'}</span>
+              <span class="font-headline-sm text-headline-sm text-primary">${row.team}</span>
+            </div>
+          </td>
+          <td class="py-space-md px-space-lg font-semibold text-on-surface">${row.day}</td>
+          <td class="py-space-md px-space-lg font-mono text-on-surface-variant whitespace-nowrap">${row.time}</td>
+        </tr>`,
     )
     .join('');
 }
@@ -127,19 +151,21 @@ function renderStreamers(streamers) {
   grid.innerHTML = streamers
     .map(
       (streamer) => `
-        <article class="card streamer-card">
-          <div class="streamer-card__embed">
+        <article class="rounded-xl bg-surface-container-low overflow-hidden shadow-xl flex flex-col group">
+          <div class="relative w-full aspect-video bg-surface-container overflow-hidden">
             <iframe
+              class="absolute inset-0 w-full h-full"
               src="https://player.twitch.tv/?channel=${streamer.channel}&parent=${parent}&muted=true&autoplay=false"
               title="Twitch-stream van ${streamer.name}"
               allowfullscreen
               loading="lazy"
             ></iframe>
           </div>
-          <div class="streamer-card__footer">
-            <span class="streamer-card__name">${streamer.name}</span>
-            <a class="streamer-card__link" href="${streamer.url}" target="_blank" rel="noopener noreferrer">
-              Bekijk op Twitch &rarr;
+          <div class="p-space-md flex items-center justify-between gap-space-md">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">${streamer.name}</h3>
+            <a class="inline-flex shrink-0 items-center gap-space-xs text-primary hover:text-primary-fixed font-label-sm text-label-sm uppercase tracking-wider transition-colors" href="${streamer.url}" target="_blank" rel="noopener noreferrer">
+              <span>Twitch</span>
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
             </a>
           </div>
         </article>`,
@@ -147,54 +173,19 @@ function renderStreamers(streamers) {
     .join('');
 }
 
-function initScrollReveal() {
-  const revealEls = document.querySelectorAll('.reveal, .reveal-group');
+function initMobileNav() {
+  const toggle = document.querySelector('#nav-toggle');
+  const panel = document.querySelector('#mobile-nav');
+  if (!toggle || !panel) return;
 
-  if (!('IntersectionObserver' in window) || revealEls.length === 0) {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
-  );
-
-  revealEls.forEach((el) => observer.observe(el));
-}
-
-const HEADER_REVEAL_OFFSET = 40;
-
-function initHeaderReveal() {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
-
-  let ticking = false;
-
-  const syncHeader = () => {
-    header.classList.toggle('is-visible', window.scrollY > HEADER_REVEAL_OFFSET);
-    ticking = false;
+  const setOpen = (open) => {
+    panel.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.querySelector('.material-symbols-outlined').textContent = open ? 'close' : 'menu';
   };
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        window.requestAnimationFrame(syncHeader);
-        ticking = true;
-      }
-    },
-    { passive: true },
-  );
-
-  syncHeader();
+  toggle.addEventListener('click', () => setOpen(panel.classList.contains('hidden')));
+  panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -203,8 +194,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSchedule(teams);
   renderProgressUpdated();
   renderStreamers(streamersData.streamers);
-  // Reveal groups are populated dynamically, so observe them after render.
-  initScrollReveal();
-  initHeaderReveal();
+  initMobileNav();
 });
-

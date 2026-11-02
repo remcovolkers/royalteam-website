@@ -4,7 +4,7 @@ De website van de World of Warcraft guild **RoyalTeam** op **Silvermoon-EU**.
 
 ## Ontwikkelen
 
-Dit project gebruikt [Vite](https://vite.dev) als build tool en dev server, met vanilla JavaScript en SCSS.
+Dit project gebruikt [Vite](https://vite.dev) als build tool en dev server, met vanilla JavaScript en [Tailwind CSS](https://tailwindcss.com) (v3).
 
 ```bash
 npm install       # eenmalig, installeert dependencies
@@ -17,9 +17,9 @@ Deployment naar GitHub Pages (`royal-team.nl`) gebeurt automatisch via [.github/
 
 ## Bestanden
 
-- `index.html` — de pagina-inhoud
-- `src/styles/` — SCSS, opgesplitst in `_variables`, `_base`, `_animations` en `_components`
-- `src/scripts/main.js` — rendert de teamprogress/planning en regelt de scroll-animaties
+- `index.html`, `retail/index.html`, `forever/index.html` — de pagina's (statische HTML met Tailwind-klassen; iconen via een Google Fonts Material Symbols-subset in de `<head>`, voeg een nieuw icoon toe aan `icon_names`)
+- `src/styles/main.css` — Tailwind-entry; design tokens (kleuren, fonts, spacing) staan in `tailwind.config.js` en komen uit het Stitch-ontwerp (`src/styles/stitch/design.html`, alleen referentie)
+- `src/scripts/main.js` — rendert teamprogress, planning en streamers en regelt het mobiele menu
 - `src/data/teams.json` + `progress.json` — teams en door Warcraft Logs gegenereerde progress
 - `scripts/generate-icons.mjs` — genereert de favicon/icon-bundel uit `src/assets/images/logo-source.png`
 

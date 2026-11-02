@@ -1,22 +1,23 @@
 {
-  "updatedAt": "2026-09-15T00:00:00.000Z",
+  "updatedAt": "2026-11-02T13:07:10.647Z",
   "teams": {
     "crusaders": {
       "raids": [
         {
-          "name": "Tidebound Grotto",
+          "name": "The Venomous Abyss",
           "difficulties": {
-            "normal": { "killed": 1, "total": 1 },
-            "heroic": { "killed": 1, "total": 1 },
-            "mythic": { "killed": 0, "total": 1 }
-          }
-        },
-        {
-          "name": "Venomous Abyss",
-          "difficulties": {
-            "normal": { "killed": 8, "total": 8 },
-            "heroic": { "killed": 7, "total": 8 },
-            "mythic": { "killed": 1, "total": 8 }
+            "normal": {
+              "killed": 9,
+              "total": 10
+            },
+            "heroic": {
+              "killed": 10,
+              "total": 10
+            },
+            "mythic": {
+              "killed": 4,
+              "total": 10
+            }
           }
         }
       ]
@@ -24,19 +25,20 @@
     "templars": {
       "raids": [
         {
-          "name": "Tidebound Grotto",
+          "name": "The Venomous Abyss",
           "difficulties": {
-            "normal": { "killed": 1, "total": 1 },
-            "heroic": { "killed": 1, "total": 1 },
-            "mythic": { "killed": 0, "total": 1 }
-          }
-        },
-        {
-          "name": "Venomous Abyss",
-          "difficulties": {
-            "normal": { "killed": 8, "total": 8 },
-            "heroic": { "killed": 7, "total": 8 },
-            "mythic": { "killed": 0, "total": 8 }
+            "normal": {
+              "killed": 8,
+              "total": 10
+            },
+            "heroic": {
+              "killed": 10,
+              "total": 10
+            },
+            "mythic": {
+              "killed": 5,
+              "total": 10
+            }
           }
         }
       ]
@@ -44,19 +46,20 @@
     "social-raid": {
       "raids": [
         {
-          "name": "Tidebound Grotto",
+          "name": "The Venomous Abyss",
           "difficulties": {
-            "normal": { "killed": 1, "total": 1 },
-            "heroic": { "killed": 1, "total": 1 },
-            "mythic": { "killed": 0, "total": 1 }
-          }
-        },
-        {
-          "name": "Venomous Abyss",
-          "difficulties": {
-            "normal": { "killed": 8, "total": 8 },
-            "heroic": { "killed": 0, "total": 8 },
-            "mythic": { "killed": 0, "total": 8 }
+            "normal": {
+              "killed": 0,
+              "total": 10
+            },
+            "heroic": {
+              "killed": 1,
+              "total": 10
+            },
+            "mythic": {
+              "killed": 0,
+              "total": 10
+            }
           }
         }
       ]

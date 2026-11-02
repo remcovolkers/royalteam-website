@@ -13,3 +13,7 @@ Thumbs.db
 
 # Logs
 npm-debug.log*
+
+# Secrets
+.env
+.env.*
