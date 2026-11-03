@@ -57,6 +57,9 @@ Eenmalig instellen:
 
 ## SEO
 
-- Pagina's: `/` (homepage), `/retail/`, `/forever/`, elk met eigen title, description, H1, canonical en Open Graph.
+- Pagina's: `/` (homepage), `/retail/`, `/forever/`, `/recruitment/`, `/faq/` (met `FAQPage`-schema) en `/over-ons/`, elk met eigen title, description, H1, canonical en Open Graph.
+- Raidtijden staan ook als gewone tekst op de homepage, `/retail/`, `/recruitment/`, `/faq/` en `/over-ons/` (zodat zoekmachines ze zonder JavaScript zien). Pas je `teams.json` aan, werk die teksten dan ook bij.
+- De FAQ-antwoorden staan zowel zichtbaar op de pagina als in het `FAQPage` JSON-LD blok; houd die gelijk.
+- Favicon: `public/favicon.ico` (48x48) plus `icons/logo-48x48.png`; Google wil een favicon in een veelvoud van 48px.
 - `public/robots.txt`, `public/sitemap.xml` en `public/404.html` worden mee gedeployed.
 - Voeg bij nieuwe pagina's een `rollupOptions.input`-entry toe in `vite.config.js` en een `<url>` in de sitemap.
