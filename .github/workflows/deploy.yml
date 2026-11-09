@@ -41,6 +41,14 @@ jobs:
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: npm run wcl:fetch
 
+      # Faalt dit, dan blijft de gecommitte snapshot in src/data/roster.json staan.
+      - name: Fetch roster count
+        continue-on-error: true
+        env:
+          BLIZZARD_CLIENT_ID: ${{ secrets.BLIZZARD_CLIENT_ID }}
+          BLIZZARD_CLIENT_SECRET: ${{ secrets.BLIZZARD_CLIENT_SECRET }}
+        run: npm run roster:fetch
+
       - name: Build
         run: npm run build
 

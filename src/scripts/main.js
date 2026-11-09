@@ -8,6 +8,7 @@ import '../styles/main.css';
 import teamsData from '../data/teams.json';
 import progressData from '../data/progress.json';
 import streamersData from '../data/streamers.json';
+import rosterData from '../data/roster.json';
 
 const DIFFICULTIES = {
   normal: { label: 'Normal', text: 'text-secondary-fixed', bar: 'bg-secondary-fixed' },
@@ -173,6 +174,28 @@ function renderStreamers(streamers) {
     .join('');
 }
 
+// Toont het aantal guildleden (roster.json); een tegel verschijnt alleen als er een geldig aantal is.
+function renderRoster() {
+  const wrapper = document.querySelector('#roster-stats');
+  if (!wrapper) return;
+
+  let visible = 0;
+  for (const key of ['retail', 'forever']) {
+    const tile = wrapper.querySelector(`#roster-${key}`);
+    const count = rosterData[key]?.count;
+    if (!tile || !Number.isInteger(count) || count <= 0) continue;
+    tile.querySelector('[data-roster-count]').textContent = count.toLocaleString('nl-NL');
+    tile.classList.remove('hidden');
+    tile.classList.add('flex');
+    visible += 1;
+  }
+
+  if (visible > 0) {
+    wrapper.classList.remove('hidden');
+    wrapper.classList.add('flex');
+  }
+}
+
 function initMobileNav() {
   const toggle = document.querySelector('#nav-toggle');
   const panel = document.querySelector('#mobile-nav');
@@ -193,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeams(teams);
   renderSchedule(teams);
   renderProgressUpdated();
+  renderRoster();
   renderStreamers(streamersData.streamers);
   initMobileNav();
 });
