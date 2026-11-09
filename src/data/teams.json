@@ -18,6 +18,8 @@
       "id": "templars",
       "name": "Templars",
       "description": "Ons donderdag/zondag team.",
+      "status": "paused",
+      "statusNote": "Gepauzeerd dit seizoen",
       "schedule": [
         { "day": "Donderdag", "time": "20:00 - 23:00" },
         { "day": "Zondag", "time": "20:00 - 23:00" }

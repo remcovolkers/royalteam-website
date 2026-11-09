@@ -6,7 +6,7 @@
     <title>WoW Retail Guild – Raid &amp; Mythic+ | RoyalTeam</title>
     <meta
       name="description"
-      content="Nederlandstalige WoW Retail guild: raid met onze teams Crusaders en Templars, doe Mythic+ keys en sluit aan bij onze social content. Bekijk de actuele raidprogress en raidplanning van RoyalTeam."
+      content="Nederlandstalige WoW Retail guild: raid met ons team Crusaders (Templars is dit seizoen gepauzeerd), doe Mythic+ keys en sluit aan bij onze social content. Bekijk de actuele raidprogress en raidplanning van RoyalTeam."
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://royal-team.nl/retail/" />
@@ -24,7 +24,7 @@
     <meta property="og:title" content="WoW Retail Guild – Raid &amp; Mythic+ | RoyalTeam" />
     <meta
       property="og:description"
-      content="Nederlandstalige WoW Retail guild met raidteams Crusaders en Templars, Mythic+ en social content."
+      content="Nederlandstalige WoW Retail guild met raidteam Crusaders, Mythic+ en social content. Templars is dit seizoen gepauzeerd."
     />
     <meta property="og:image" content="https://royal-team.nl/icons/logo-900x900.png" />
     <meta property="og:image:width" content="900" />
@@ -45,13 +45,13 @@
     </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=analytics,arrow_forward,calendar_clock,celebration,chevron_right,close,diamond,forum,groups,hourglass_top,how_to_reg,info,leaderboard,menu,military_tech,shield,swords,token,verified&display=block" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=analytics,arrow_forward,calendar_clock,celebration,chevron_right,close,diamond,forum,groups,hourglass_top,how_to_reg,info,leaderboard,menu,military_tech,pause_circle,shield,swords,token,verified&display=block" />
   </head>
   <body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col">
     <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_10px_30px_-5px_rgba(0,0,0,0.8),0_0_1px_1px_rgba(240,196,25,0.08)]">
       <div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md">
         <a class="flex items-center gap-space-sm group" href="/" aria-label="RoyalTeam - naar de homepage">
-          <img class="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105" src="/icons/logo-192x192.png" alt="RoyalTeam logo" width="40" height="40" />
+          <img class="h-14 w-14 object-contain transition-transform duration-300 group-hover:scale-105" src="/icons/logo-192x192.png" alt="RoyalTeam logo" width="56" height="56" />
           <span class="flex flex-col">
             <span class="font-headline-sm text-headline-sm text-primary tracking-widest uppercase leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">RoyalTeam</span>
             <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-space-xs hidden sm:block">Nederlandstalige WoW Guild</span>
@@ -108,7 +108,8 @@
             <div class="lg:col-span-4 flex flex-col gap-space-md bg-surface-container/70 backdrop-blur-md p-space-lg rounded-xl shadow-xl">
               <span class="font-label-md text-label-md text-primary uppercase pb-space-xs">Guild samenvatting</span>
               <div class="grid grid-cols-2 gap-space-sm">
-                <div class="p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Raidteams</span><span class="font-headline-md text-headline-md text-primary">3</span></div>
+                <div data-roster-tile="retail" data-roster-show="block" class="hidden col-span-2 p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Roster</span><span class="font-headline-md text-headline-md text-primary"><span data-roster-count></span> <span class="font-label-md text-label-md text-on-surface-variant uppercase">characters</span></span></div>
+                <div class="p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Raidteams</span><span class="font-headline-md text-headline-md text-primary">2</span></div>
                 <div class="p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Voertaal</span><span class="font-headline-md text-headline-md text-on-surface">Nederlands</span></div>
                 <div class="p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Realm</span><span class="font-headline-md text-headline-md text-secondary">Cross-realm</span></div>
                 <div class="p-space-sm rounded bg-surface-container-lowest"><span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Ook</span><span class="font-headline-md text-headline-md text-primary">Mythic+</span></div>
@@ -141,9 +142,9 @@
             <div class="group relative flex flex-col p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1">
               <div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-space-md text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[28px]" aria-hidden="true">shield</span></div>
               <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider mb-space-xs">Raidteam</span>
-              <h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors mb-space-sm">Templars</h3>
-              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md flex-1">Ons vaste raidteam op donderdag en zondag, gericht op progressie in Heroic en Mythic.</p>
-              <div class="pt-space-sm text-on-surface-variant font-label-sm text-label-sm">Donderdag &amp; zondag &middot; 20:00 &ndash; 23:00</div>
+              <h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors mb-space-sm">Templars <span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm uppercase tracking-wider"><span class="material-symbols-outlined text-[14px]" aria-hidden="true">pause_circle</span>Gepauzeerd</span></h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-md flex-1">Ons raidteam op donderdag en zondag. Dit seizoen gepauzeerd; we laten het weten zodra Templars weer raidt.</p>
+              <div class="pt-space-sm text-on-surface-variant font-label-sm text-label-sm">Gepauzeerd dit seizoen</div>
             </div>
             <div class="group relative flex flex-col p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1">
               <div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-space-md text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[28px]" aria-hidden="true">token</span></div>
@@ -169,7 +170,7 @@
             <span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Raiden &amp; keys</span>
             <h2 class="font-headline-xl text-[24px] leading-[32px] sm:text-headline-xl break-words text-on-surface uppercase">Zo raiden we op WoW Retail</h2>
           </div>
-          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">RoyalTeam speelt Retail op Silvermoon-EU, maar omdat Retail cross-realm is hoef je niet van realm te wisselen om mee te doen. Onze twee progressieteams, Crusaders en Templars, raiden elk twee avonden per week van 20:00 tot 23:00 en richten zich op Heroic en Mythic. Crusaders raiden op maandag en woensdag, Templars op donderdag en zondag.</p>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">RoyalTeam speelt Retail op Silvermoon-EU, maar omdat Retail cross-realm is hoef je niet van realm te wisselen om mee te doen. Ons progressieteam Crusaders raidt twee avonden per week (maandag en woensdag, 20:00 tot 23:00) en richt zich op Heroic en Mythic. Templars (donderdag en zondag) is dit seizoen gepauzeerd.</p>
           <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Wil je het rustiger aan doen of eerst kennismaken? Onze social raid op dinsdag (20:30 &ndash; 22:30) is laagdrempelig. Daarnaast lopen we samen Mythic+ keys, van beginnende keystones tot hoge levels, en organiseren we community events. Groepen regel je via onze open Discord.</p>
           <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">De actuele raidprogress staat hieronder. Ons guildprofiel met Mythic+ en raidscores vind je op <a class="text-primary underline underline-offset-4 hover:text-primary-fixed" href="https://raider.io/guilds/eu/silvermoon/RoyalTeam" target="_blank" rel="noopener noreferrer">Raider.IO</a>. Wil je meedoen? Bekijk de <a class="text-primary underline underline-offset-4 hover:text-primary-fixed" href="/recruitment/">recruitment-pagina</a> of de <a class="text-primary underline underline-offset-4 hover:text-primary-fixed" href="/faq/">veelgestelde vragen</a>.</p>
         </div>
@@ -238,7 +239,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl mb-space-xl">
           <div class="flex flex-col gap-space-md">
             <div class="flex items-center gap-space-sm">
-              <img class="h-8 w-8 object-contain" src="/icons/logo-192x192.png" alt="" width="32" height="32" loading="lazy" />
+              <img class="h-10 w-10 object-contain" src="/icons/logo-192x192.png" alt="" width="40" height="40" loading="lazy" />
               <span class="font-headline-md text-headline-md text-primary tracking-widest uppercase">RoyalTeam</span>
             </div>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Nederlandstalige World of Warcraft guild voor Retail en WoW Forever: raiden, Mythic+, samen levelen en een open Discord.</p>

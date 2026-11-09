@@ -40,7 +40,7 @@ Deployment naar GitHub Pages (`royal-team.nl`) gebeurt automatisch via [.github/
 | Team | Warcraft Logs |
 | --- | --- |
 | Crusaders | <https://www.warcraftlogs.com/guild/id/744461> |
-| Templars | <https://www.warcraftlogs.com/guild/id/816789> |
+| Templars (gepauzeerd dit seizoen) | <https://www.warcraftlogs.com/guild/id/816789> |
 
 ## Warcraft Logs-data
 

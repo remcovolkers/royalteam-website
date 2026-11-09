@@ -61,6 +61,9 @@ function renderDifficultyBars(difficulties) {
     .join('');
 }
 
+const isPaused = (team) => team.status === 'paused';
+const pausedNote = (team) => team.statusNote || 'Gepauzeerd';
+
 const WEEKDAYS = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'];
 
 function sortSchedule(schedule) {
@@ -95,20 +98,26 @@ function renderTeams(teams) {
         )
         .join('');
       const raidContent = raids || '<p class="font-body-sm text-body-sm text-on-surface-variant">Nog geen raidprogress beschikbaar.</p>';
+      const paused = isPaused(team);
+      const badge = paused
+        ? `<span class="inline-flex items-center gap-1 mt-space-xs px-space-sm py-0.5 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm uppercase tracking-wider"><span class="material-symbols-outlined text-[14px]" aria-hidden="true">pause_circle</span>${pausedNote(team)}</span>`
+        : '';
+      const scheduleText = paused ? pausedNote(team) : formatSchedule(team.schedule);
       const description = team.description ? `<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">${team.description}</p>` : '';
 
       return `
-        <article class="flex flex-col p-space-lg rounded-xl bg-surface-container-low shadow-xl">
+        <article class="flex flex-col p-space-lg rounded-xl bg-surface-container-low shadow-xl${paused ? ' opacity-70' : ''}">
           <div class="flex items-start justify-between gap-space-md pb-space-md">
             <div>
               <h3 class="font-headline-lg text-headline-lg text-primary">${team.name}</h3>
               ${description}
+              ${badge}
             </div>
             <span class="material-symbols-outlined text-primary text-[28px]" aria-hidden="true">${TEAM_ICONS[team.id] ?? 'military_tech'}</span>
           </div>
           <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
             <span class="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">calendar_clock</span>
-            <span>${formatSchedule(team.schedule)}</span>
+            <span>${scheduleText}</span>
           </div>
           <div class="flex flex-col gap-space-lg mb-space-xl flex-1">${raidContent}</div>
           <a class="inline-flex items-center justify-between p-space-sm rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider transition-colors" href="${team.warcraftLogsUrl}" target="_blank" rel="noopener noreferrer">
@@ -125,7 +134,11 @@ function renderSchedule(teams) {
   if (!body) return;
 
   body.innerHTML = teams
-    .flatMap((team) => sortSchedule(team.schedule).map((slot) => ({ team: team.name, id: team.id, ...slot })))
+    .flatMap((team) =>
+      isPaused(team)
+        ? [{ team: team.name, id: team.id, paused: true, note: pausedNote(team) }]
+        : sortSchedule(team.schedule).map((slot) => ({ team: team.name, id: team.id, ...slot })),
+    )
     .map(
       (row, index) => `
         <tr class="hover:bg-surface-container transition-colors${index % 2 ? ' bg-surface-container-lowest/40' : ''}">
@@ -135,8 +148,12 @@ function renderSchedule(teams) {
               <span class="font-headline-sm text-headline-sm text-primary">${row.team}</span>
             </div>
           </td>
-          <td class="py-space-md px-space-lg font-semibold text-on-surface">${row.day}</td>
-          <td class="py-space-md px-space-lg font-mono text-on-surface-variant whitespace-nowrap">${row.time}</td>
+          ${
+            row.paused
+              ? `<td class="py-space-md px-space-lg font-semibold text-secondary" colspan="2"><span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" aria-hidden="true">pause_circle</span>${row.note}</span></td>`
+              : `<td class="py-space-md px-space-lg font-semibold text-on-surface">${row.day}</td>
+          <td class="py-space-md px-space-lg font-mono text-on-surface-variant whitespace-nowrap">${row.time}</td>`
+          }
         </tr>`,
     )
     .join('');
@@ -174,26 +191,38 @@ function renderStreamers(streamers) {
     .join('');
 }
 
-// Toont het aantal guildleden (roster.json); een tegel verschijnt alleen als er een geldig aantal is.
+// Toont het aantal guildleden (roster.json). Elk element met data-roster-tile="retail|forever" blijft verborgen
+// totdat er een geldig aantal is; data-roster-show bevat de display-klasse die dan wordt toegevoegd (bijv. "flex").
 function renderRoster() {
-  const wrapper = document.querySelector('#roster-stats');
-  if (!wrapper) return;
-
-  let visible = 0;
-  for (const key of ['retail', 'forever']) {
-    const tile = wrapper.querySelector(`#roster-${key}`);
-    const count = rosterData[key]?.count;
-    if (!tile || !Number.isInteger(count) || count <= 0) continue;
-    tile.querySelector('[data-roster-count]').textContent = count.toLocaleString('nl-NL');
+  for (const tile of document.querySelectorAll('[data-roster-tile]')) {
+    const count = rosterData[tile.dataset.rosterTile]?.count;
+    if (!Number.isInteger(count) || count <= 0) continue;
+    for (const el of tile.querySelectorAll('[data-roster-count]')) el.textContent = count.toLocaleString('nl-NL');
     tile.classList.remove('hidden');
-    tile.classList.add('flex');
-    visible += 1;
+    if (tile.dataset.rosterShow) tile.classList.add(tile.dataset.rosterShow);
   }
 
-  if (visible > 0) {
-    wrapper.classList.remove('hidden');
-    wrapper.classList.add('flex');
+  // Wrapper met meerdere tegels (homepage): pas tonen als minstens één tegel zichtbaar is.
+  for (const group of document.querySelectorAll('[data-roster-group]')) {
+    if (group.querySelector('[data-roster-tile]:not(.hidden)')) {
+      group.classList.remove('hidden');
+      group.classList.add('flex');
+    }
   }
+}
+
+// Verbergt de scroll-hint op de homepage zodra de bezoeker begint te scrollen.
+function initScrollHint() {
+  const hint = document.querySelector('#scroll-hint');
+  if (!hint) return;
+
+  const update = () => {
+    const hidden = window.scrollY > 40;
+    hint.classList.toggle('opacity-0', hidden);
+    hint.classList.toggle('pointer-events-none', hidden);
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
 }
 
 function initMobileNav() {
@@ -219,4 +248,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRoster();
   renderStreamers(streamersData.streamers);
   initMobileNav();
+  initScrollHint();
 });
